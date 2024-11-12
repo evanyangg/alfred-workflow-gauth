@@ -8,6 +8,8 @@ import time
 
 
 def get_hotp_token(key, intervals_no):
+    if isinstance(key, str):
+    key = key.encode()
     msg = struct.pack(">Q", intervals_no)
     h = hmac.new(key, msg, hashlib.sha1).digest()
     o = h[19] & 15
